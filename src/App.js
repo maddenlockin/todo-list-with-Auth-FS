@@ -11,6 +11,7 @@ import LoginPage from './LoginPage';
 import SignUpPage from './SignUpPage';
 import HomePage from './HomePage';
 import './App.css'
+import Header from './Header';
 
 export default class App extends Component {
   state = { token: localStorage.getItem('TOKEN') }
@@ -24,13 +25,7 @@ export default class App extends Component {
     return (
       <div>
         <Router>
-          <ul>
-            <Link to="/">Home</Link>
-            <Link to="/login">Log in</Link>
-            <Link to="/signup">Sign Up</Link>
-            <Link to="/todos">To-do List</Link>
-            <button onClick={() => this.handleTokenChange('')}>logout</button>
-          </ul>
+          <Header />
           <Switch>
             <Route 
             exact path='/' 
