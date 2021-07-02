@@ -3,7 +3,7 @@ import {
     BrowserRouter as Router, 
     Route, 
     Switch,
-    Link,
+    //Link,
     Redirect
 } from "react-router-dom";
 import TodosPage from './TodosPage';
@@ -16,15 +16,16 @@ import Header from './Header';
 export default class App extends Component {
   state = { token: localStorage.getItem('TOKEN') }
 
-  handleTokenChange = (myToken) => {
-    this.setState({ token: myToken });
-    localStorage.setItem('TOKEN', myToken);
+  login = (userToken) => {
+    this.setState({token: userToken})
+    localStorage.setItem('TOKEN', userToken)
   }
+  //logout, clear usertoken
 
   render() {
     return (
-      <div>
-        <Router>
+      <Router>
+        <div>
           <Header />
           <Switch>
             <Route 
@@ -42,18 +43,17 @@ export default class App extends Component {
               render={(routerProps) => <SignUpPage 
                 {...routerProps}/>} 
               />
-          <Route 
+            <Route 
             exact path='/todos' 
             render={(routerProps) =>
               this.state.token 
                 ? <TodosPage {...routerProps} token={this.state.token} /> 
                 : <Redirect to="/" />
               } 
-          />
-
+            />
           </Switch>
-        </Router>
-      </div>
+        </div>
+      </Router>
     )
   }
 }
